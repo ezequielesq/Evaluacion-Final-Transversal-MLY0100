@@ -238,7 +238,7 @@ de riesgo crediticio, pero representa una limitación a considerar.
 
 # 5. Despliegue
 
-El modelo fue desplegado exitosamente en https://www.ezsuarez.org/Prediccion/#/dashboard.
+La interfaz web es accesible desde https://www.ezsuarez.org/Prediccion/#/dashboard
 
 La interfaz web permite seleccionar automáticamente un ejemplo de entrada válido, visualizar y editar el JSON correspondiente y enviarlo al modelo para obtener una predicción. El resultado se muestra junto con la probabilidad de riesgo.
 
