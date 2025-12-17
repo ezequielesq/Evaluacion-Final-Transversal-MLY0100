@@ -1,11 +1,32 @@
-from fastapi import FastAPI, HTTPException, Body, Request
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import numpy as np
 
 app = FastAPI()
 
+# =========================
+# CORS (SOLUCIÓN AL ERROR)
+# =========================
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:4200",      # Angular dev
+        "https://www.ezsuarez.org"    # Producción (si aplica)
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# =========================
+# CARGA MODELO
+# =========================
 model = joblib.load("modelo_riesgo_crediticio_lgb.pkl")
 
+# =========================
+# ENDPOINTS
+# =========================
 @app.get("/health")
 def health():
     return {"status": "ok"}

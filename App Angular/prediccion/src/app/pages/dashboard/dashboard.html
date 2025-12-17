@@ -1,0 +1,79 @@
+<div class="w3-container w3-padding">
+
+  <h2>Evaluación de Riesgo Crediticio</h2>
+
+  <!-- ESTADO API -->
+  <div class="w3-card w3-padding w3-light-grey w3-margin-bottom">
+    <strong>Estado API:</strong>
+    <span
+      *ngIf="healthStatus?.status === 'ok'"
+      class="w3-tag w3-green">Online</span>
+    <span
+      *ngIf="healthStatus?.status !== 'ok'"
+      class="w3-tag w3-red">Offline</span>
+  </div>
+
+  <!-- BOTÓN DEMO -->
+  <button
+    class="w3-button w3-blue"
+    (click)="loadDemoSample()">
+    Seleccionar ejemplo automático
+  </button>
+
+  <!-- JSON EDITABLE -->
+  <div
+    *ngIf="editableJson"
+    class="w3-card w3-padding w3-margin-top">
+
+    <h3>Vector de entrada (editable)</h3>
+
+    <textarea
+      class="w3-input w3-border"
+      rows="10"
+      [(ngModel)]="editableJson"
+      spellcheck="false"
+      style="font-family: monospace">
+    </textarea>
+
+    <button
+      class="w3-button w3-green w3-margin-top"
+      (click)="sendPrediction()"
+      [disabled]="loading">
+      {{ loading ? 'Procesando...' : 'Enviar a modelo' }}
+    </button>
+
+  </div>
+
+  <!-- ERROR -->
+  <div
+    *ngIf="error"
+    class="w3-panel w3-pale-red w3-leftbar w3-border-red w3-margin-top">
+    {{ error }}
+  </div>
+
+  <!-- RESULTADO -->
+  <div
+    *ngIf="prediction"
+    class="w3-card w3-padding w3-margin-top">
+
+    <h3>Resultado</h3>
+
+    <p>
+      <strong>Clasificación:</strong>
+      {{ prediction.prediccion === 1 ? 'Riesgoso' : 'No riesgoso' }}
+    </p>
+
+    <p>
+      <strong>Probabilidad:</strong>
+      {{ probability | number:'1.2-2' }}
+    </p>
+
+    <span
+      class="w3-tag"
+      [ngClass]="getRiskColor()">
+      Riesgo {{ getRiskLabel() }}
+    </span>
+
+  </div>
+
+</div>
