@@ -71,7 +71,7 @@ Se aplicó una función genérica de **Data Understanding** a todas las tablas, 
 
 # 2. Preparación de los datos
 
-Esta fue la fase más extensa y crítica del proyecto.
+Esta fue la fase más extensa del proyecto.
 
 ## Construcción del dataset base
 
