@@ -11,16 +11,19 @@ El trabajo se estructura en **cuatro fases principales**:
 3. **Modelamiento**
 4. **Evaluación y despliegue**
 
-El objetivo final es construir, evaluar y desplegar un modelo capaz de **estimar la probabilidad de incumplimiento (`TARGET = 1`)**, priorizando métricas relevantes para problemas desbalanceados como **Recall, F1-score y ROC AUC**.
+El objetivo final es construir, evaluar y desplegar un modelo capaz de **estimar la probabilidad de incumplimiento (`TARGET = 1`)**, priorizando métricas relevantes para problemas desbalanceados **Recall, F1-score y ROC AUC**.
 
-Para ejecutar correctamente el proyecto es necesario crear una carpeta llamada `datos_examen` y ubicar en ella los archivos `.parquet` proporcionados.  
-Esta carpeta debe estar en el mismo directorio que los notebooks.
+Para ejecutar correctamente el proyecto, es necesario crear una carpeta denominada `datos_examen` y ubicar en ella los archivos con extensión `.parquet` proporcionados para el análisis.  
+Esta carpeta debe encontrarse en el mismo directorio raíz donde se ubican las carpetas que contienen los notebooks del proyecto, de modo que las rutas de carga de datos funcionen correctamente.
+
+Adicionalmente, es obligatorio instalar las librerías necesarias para la ejecución del proyecto.  
+El listado de dependencias se encuentra especificado en un archivo `.txt` ubicado en la carpeta `Artefactos`, bajo el nombre **`Dependencias`**, el cual debe utilizarse para instalar el entorno requerido antes de ejecutar los notebooks.
 
 ---
 
 # 1. Comprensión de los datos
 
-En esta fase se realizó un análisis exhaustivo de todas las tablas disponibles para entender su estructura, calidad y relación entre ellas.
+En esta fase se realizó un análisis de todas las tablas disponibles para entender su estructura, calidad y relación entre ellas.
 
 ## Dataset principal
 
@@ -55,11 +58,11 @@ Se aplicó una función genérica de **Data Understanding** a todas las tablas, 
 - Identificación de filas duplicadas
 - Estadísticas descriptivas
 
-### Hallazgos clave
+### Hallazgos
 
 - Alta presencia de **valores nulos estructurales** (>50%) en variables de características físicas de la vivienda.
 - Presencia de **variables altamente correlacionadas** (versiones AVG, MODE, MEDI).
-- Variables categóricas con **alta cardinalidad** (ej. `ORGANIZATION_TYPE`).
+- Variables categóricas con **alta cardinalidad** (`ORGANIZATION_TYPE`).
 - Dataset fuertemente **desbalanceado**:
   - `TARGET = 1` ≈ **8%**
   - `TARGET = 0` ≈ **92%**
@@ -115,7 +118,7 @@ Este mismo enfoque se aplicó a:
 
 ## Eliminación de columnas irrelevantes o ruidosas
 
-Se eliminaron variables según criterios claros y justificados:
+Se eliminaron variables según los siguientes criterios:
 
 ### Ruido estructural
 - Flags de documentos (`FLAG_DOCUMENT_2` a `FLAG_DOCUMENT_21`)
@@ -141,7 +144,7 @@ Se eliminaron variables según criterios claros y justificados:
 ## Tratamiento de valores nulos
 
 ### Nulos estructurales
-- Variables históricas (ej. tarjetas, créditos previos)
+- Variables históricas (tarjetas, créditos previos)
 - Se imputaron con **0**, interpretado como:
   > “No existe historial para este cliente”
 
